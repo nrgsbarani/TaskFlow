@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <title>TaskFlow</title>
@@ -7,32 +7,32 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="TaskFlow.css">
 </head>
-<body class="p-5 bg-white dark:bg-gray-900 antialiased ">
-    <nav class="bg-white fixed top-0 left-0 w-full border-gray-200 dark:bg-gray-900 z-50" id="nav-style">
+<body class="p-5 bg-white stark:bg-gray-900 antialiased ">
+    <nav class="bg-white fixed top-0 left-0 w-full border-gray-200 stark:bg-gray-900 z-50" id="nav-style">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">TaskFlow</span>
+            <a href="https://github.com/amirdadipoor/TaskFlow" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white stark:text-white">TaskFlow</span>
             </a>
             <div class="flex md:order-2">
                 
                 <div class="relative hidden md:block">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 text-gray-500 stark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
-                    <input type="text" id="search-navbar" class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="جستوجو ...">
+                    <input type="text" id="search-navbar" class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 stark:bg-gray-700 stark:border-gray-600 stark:placeholder-gray-400 stark:text-white stark:focus:ring-blue-500 stark:focus:border-blue-500" placeholder="جستوجو ...">
                 </div>
             </div>
         </div>
     </nav>
     <div class="w-full px-4 mx-auto max-w-8xl pt-8 mt-4">
         <aside id="" class="fixed left-0 top-16 h-screen w-64 transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800" id="sidebar-style">
+            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 stark:bg-gray-800" id="sidebar-style">
                 <ul class="space-y-2 font-medium">
                     <li>
-                        <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg stark:text-white hover:bg-gray-100 stark:hover:bg-gray-700 group">
+                            <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1v3m5-3v3m5-3v3M1 7h18M5 11h10M2 3h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"></path>
                             </svg>
                             <span class="ms-3">برد ها</span>
@@ -40,46 +40,62 @@
                     </li>
                 
                 </ul>
-                <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+                <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 stark:border-gray-700">
                     <li>
-                        <a href="javascript:;" class="flex items-center justify-between p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+                        <a href="javascript:;" id="create-new-board" class="flex items-center justify-between p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 stark:hover:bg-gray-700 stark:text-white group">
                             
                             <span class="mr-5">برد جدید</span>
                             
-                            <svg  stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-800 dark:text-white " id="new-board">
+                            <svg  stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-800 stark:text-white " id="new-board">
                                 <path d="M12 4v16m8-8H4" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
                             </svg>
                         
                         </a>
                     </li>
                 </ul>
-                <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+                <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 stark:border-gray-700" id="board-container">
+<!--
                     <li>
-                        <a href="#" class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
-                            <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                                <path d="M18 0H6a2 2 0 0 0-2 2h14v12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Z"/>
-                                <path d="M14 4H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2ZM2 16v-6h12v6H2Z"/>
-                            </svg>
-                            <span class="ms-3">پروژه اول</span>
+                        <a href="#" class="flex items-center justify-between p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 stark:hover:bg-gray-700 stark:text-white group">
+                            <div class="flex items-center ">
+                                <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 stark:text-gray-400 group-hover:text-gray-900 stark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                                    <path d="M18 0H6a2 2 0 0 0-2 2h14v12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Z"/>
+                                    <path d="M14 4H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2ZM2 16v-6h12v6H2Z"/>
+                                </svg>
+                                <span class="ms-3">پروژه اول</span>
+                            </div>
+
+                            <div class="flex items-center ">
+                                <button data-tooltip-target="tooltip-edit-item1" data-tooltip-style="light"  type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-1.5 py-1 me-2 mb-2 stark:focus:ring-yellow-900 edit-board-button">
+                                    <svg class="w-6 h-6 text-white stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                                <div id="tooltip-edit-item1" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 tooltip">
+                                    ویرایش
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
+                                <button data-tooltip-target="tooltip-delete-item1" data-tooltip-style="light"  type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-1.5 py-1 me-2 mb-2 stark:bg-red-600 stark:hover:bg-red-700 stark:focus:ring-red-800 delete-board-button">
+                                    <svg class="w-6 h-6 text-white stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                                <div id="tooltip-delete-item1" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 tooltip">
+                                    حذف
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
+                            </div>
                         </a>
                     </li>
-                    
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
-                            <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                                <path d="M18 0H6a2 2 0 0 0-2 2h14v12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Z"/>
-                                <path d="M14 4H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2ZM2 16v-6h12v6H2Z"/>
-                            </svg>
-                            <span class="ms-3">پروژه دوم</span>
-                        </a>
-                    </li>
+
+-->
                 </ul>
-                <div class="drawer">
-                    <h2 class="menu-title">ایجاد لیست جدید</h2>
-                    <input type="text" id="list-title" placeholder="عنوان لیست">
-                    <br>
-                    <button id="create-list">ایجاد</button>
-                    <button id="cancle-list">انصراف</button>
+                <div class="drawer hidden" id="create-new-item-box"> <!-- item : board , list , card ,  -->
+                    <h2 class="menu-title" id="create-new-item-tag">ایجاد لیست جدید</h2>
+                    <input type="text" class="mb-3" id="create-new-item-input" placeholder="عنوان لیست">
+                    <br class="m-4">
+                    <button id="create-new-item-button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 stark:bg-green-600 stark:hover:bg-green-700 stark:focus:ring-green-800">ایجاد</button>
+                    <button id="cancel-creation-button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 stark:focus:ring-yellow-900">انصراف</button>
                 </div>
             </div>
         </aside>
@@ -95,7 +111,7 @@
                     <li>گزارش دوم</li>
                 </ul>
                 <button class="close">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
                       </svg>                                                  
                 </button>
@@ -107,14 +123,18 @@
                     <li>گزارش دوم</li>
                 </ul>
                 <button class="close">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
                     </svg>                          
                 </button>
             </li>
         </ul>
     </div>
-    
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script src="board.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
