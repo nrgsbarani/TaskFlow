@@ -116,7 +116,7 @@ html {
     position: absolute;
     top: 100px;
     width: 25%; 
-    height: 25%;
+    /*height: 25%;*/
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 2%;
     padding: 20px;
@@ -137,4 +137,8 @@ html {
 
 .close:hover {
     transform: scale(1.2);
+}
+
+.draggable.dragging-element {
+    opacity: 0.4;
 }

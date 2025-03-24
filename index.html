@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskFlow</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="TaskFlow.css">
+</head>
+<body class="p-5 bg-white stark:bg-gray-900 antialiased ">
+    <nav class="bg-white fixed top-0 left-0 w-full border-gray-200 stark:bg-gray-900 z-50" id="nav-style">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="https://github.com/amirdadipoor/TaskFlow" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white stark:text-white">TaskFlow</span>
+            </a>
+            <div class="flex md:order-2">
+                
+                <div class="relative hidden md:block">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 stark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                    </div>
+                    <input type="text" id="search-navbar" class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 stark:bg-gray-700 stark:border-gray-600 stark:placeholder-gray-400 stark:text-white stark:focus:ring-blue-500 stark:focus:border-blue-500" placeholder="جستوجو ...">
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="w-full px-4 mx-auto max-w-8xl pt-8 mt-4">
+        <aside id="" class="fixed left-0 top-16 h-screen w-64 transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 stark:bg-gray-800" id="sidebar-style">
+                <ul class="space-y-2 font-medium">
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg stark:text-white hover:bg-gray-100 stark:hover:bg-gray-700 group">
+                            <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1v3m5-3v3m5-3v3M1 7h18M5 11h10M2 3h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"></path>
+                            </svg>
+                            <span class="ms-3">برد ها</span>
+                        </a>
+                    </li>
+                
+                </ul>
+                <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 stark:border-gray-700">
+                    <li>
+                        <a href="javascript:;" id="create-new-board" class="flex items-center justify-between p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 stark:hover:bg-gray-700 stark:text-white group">
+                            
+                            <span class="mr-5">برد جدید</span>
+                            
+                            <svg  stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-800 stark:text-white " id="new-board">
+                                <path d="M12 4v16m8-8H4" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        
+                        </a>
+                    </li>
+                </ul>
+                <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 stark:border-gray-700" id="board-container">
+
+                </ul>
+                <div class="drawer hidden" id="create-new-item-box"> <!-- item : board , list , card ,  -->
+                    <h2 class="menu-title" id="create-new-item-tag">ایجاد لیست جدید</h2>
+                    <input type="text" class="mb-3" id="create-new-item-input" placeholder="عنوان لیست">
+                    <br class="m-4">
+                    <button id="create-new-item-button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 stark:bg-green-600 stark:hover:bg-green-700 stark:focus:ring-green-800">ایجاد</button>
+                    <button id="cancel-creation-button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 stark:focus:ring-yellow-900">انصراف</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <button class="new-list-button">+ ایجاد لیست جدید</button> 
+    <div class="show-list">
+        <ul class="list" >
+            <li class="list-style" style="right: 2%; background-color: #7AB2B2;">
+                <h6 class="mb-2">عنوان لیست اول</h6>
+                <ul class="drag-zone dropzone my-8 min-h-32">
+
+                </ul>
+                <span class="mt-5">
+                    <button type="button" class="text-gray bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center stark:bg-blue-600 stark:hover:bg-blue-700 stark:focus:ring-blue-800">
+                        <span class="ml-3">افزودن آیتم جدید</span>
+                        <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                        </svg>
+                    </button>
+                </span>
+                <button class="close">
+                    <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                      </svg>                                                  
+                </button>
+            </li>
+            <li class="list-style" style="right: 28%; background-color: #A4CAFE;">
+                <h6 class="mb-2">عنوان لیست دوم</h6>
+                <ul class="drag-zone dropzone my-8 min-h-32">
+                    <li class="draggable my-2" draggable="true">
+                        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm stark:bg-gray-800 stark:border-gray-700 mb-2">
+                            <div class="flex justify-between items-center ">
+                                <div class="flex justify-start ">
+                                    <h6 class="text-base font-bold tracking-tight text-gray-900 stark:text-white">گزارش 1</h6>
+                                </div>
+                                <div class="flex justify-end px-1 pt-1">
+                                    <button id="dropdownButton21" data-dropdown-toggle="dropdown21" class="inline-block text-gray-500 stark:text-gray-400 hover:bg-gray-100 stark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 stark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                                        <span class="sr-only">Open dropdown</span>
+                                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                        </svg>
+                                    </button>
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdown21" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 stark:bg-gray-700">
+                                        <ul class="py-2" aria-labelledby="dropdownButton21">
+                                            <li>
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 stark:hover:bg-gray-600 stark:text-gray-200 stark:hover:text-white">ویرایش</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 stark:hover:bg-gray-600 stark:text-gray-200 stark:hover:text-white">حذف</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="flex justify-between items-center ">
+                                    <div class="flex justify-start mb-3">
+                                        <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                        </svg>
+                                        <h2 class="ml-1 font-normal text-gray-700 stark:text-gray-400">24th Mar</h2>
+                                    </div>
+                                    <div class="flex justify-end mb-3 items-center ltr">
+                                        <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 stark:text-gray-300 ml-1.5">انجام شده</label>
+                                        <input checked id="checked-checkbox21" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 stark:focus:ring-blue-600 stark:ring-offset-gray-800 focus:ring-2 stark:bg-gray-700 stark:border-gray-600">
+                                    </div>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm stark:bg-green-900 stark:text-green-300 min-w-sm">Green</span>
+                                <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm stark:bg-yellow-900 stark:text-yellow-300">Yellow</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="draggable my-2" draggable="true" >
+                        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm stark:bg-gray-800 stark:border-gray-700 mb-2 ">
+                            <div class="flex justify-between items-center ">
+                                <div class="flex justify-start ">
+                                    <h6 class="text-base font-bold tracking-tight text-gray-900 stark:text-white">گزارش 2</h6>
+                                </div>
+                                <div class="flex justify-end px-1 pt-1">
+                                    <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 stark:text-gray-400 hover:bg-gray-100 stark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 stark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                                        <span class="sr-only">Open dropdown</span>
+                                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                        </svg>
+                                    </button>
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 stark:bg-gray-700">
+                                        <ul class="py-2" aria-labelledby="dropdownButton">
+                                            <li>
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 stark:hover:bg-gray-600 stark:text-gray-200 stark:hover:text-white">ویرایش</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 stark:hover:bg-gray-600 stark:text-gray-200 stark:hover:text-white">حذف</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="flex justify-between items-center ">
+                                    <div class="flex justify-start mb-3">
+                                        <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                        </svg>
+                                        <h2 class="ml-1 font-normal text-gray-700 stark:text-gray-400">24th Mar</h2>
+                                    </div>
+                                    <div class="flex justify-end mb-3 items-center ltr">
+                                        <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 stark:text-gray-300 ml-1.5">انجام شده</label>
+                                        <input checked id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 stark:focus:ring-blue-600 stark:ring-offset-gray-800 focus:ring-2 stark:bg-gray-700 stark:border-gray-600">
+                                    </div>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm stark:bg-green-900 stark:text-green-300 min-w-sm">Green</span>
+                                <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm stark:bg-yellow-900 stark:text-yellow-300">Yellow</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="draggable my-2" draggable="true" >
+                        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm stark:bg-gray-800 stark:border-gray-700 mb-2 ">
+                            <div class="flex justify-between items-center ">
+                                <div class="flex justify-start ">
+                                    <h6 class="text-base font-bold tracking-tight text-gray-900 stark:text-white">گزارش 3</h6>
+                                </div>
+                                <div class="flex justify-end px-1 pt-1">
+                                    <button id="dropdownButton23" data-dropdown-toggle="dropdown23" class="inline-block text-gray-500 stark:text-gray-400 hover:bg-gray-100 stark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 stark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                                        <span class="sr-only">Open dropdown</span>
+                                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                        </svg>
+                                    </button>
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdown23" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 stark:bg-gray-700">
+                                        <ul class="py-2" aria-labelledby="dropdownButton23">
+                                            <li>
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 stark:hover:bg-gray-600 stark:text-gray-200 stark:hover:text-white">ویرایش</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 stark:hover:bg-gray-600 stark:text-gray-200 stark:hover:text-white">حذف</a>
+                                            </li>
+                                        
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="flex justify-between items-center ">
+                                    <div class="flex justify-start mb-3">
+                                        <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                        </svg>
+                                        <h2 class="ml-1 font-normal text-gray-700 stark:text-gray-400">24th Mar</h2>
+                                    </div>
+                                    <div class="flex justify-end mb-3 items-center ltr">
+                                        <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 stark:text-gray-300 ml-1.5">انجام شده</label>
+                                        <input checked id="checked-checkbox23" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 stark:focus:ring-blue-600 stark:ring-offset-gray-800 focus:ring-2 stark:bg-gray-700 stark:border-gray-600">
+                                    </div>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm stark:bg-green-900 stark:text-green-300 min-w-sm">Green</span>
+                                <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm stark:bg-yellow-900 stark:text-yellow-300">Yellow</span>
+                            </div>
+                        </div>
+                </li>
+                </ul>
+                <span class="mt-5">
+                    <button type="button" class="text-gray bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center stark:bg-blue-600 stark:hover:bg-blue-700 stark:focus:ring-blue-800">
+                        <span class="ml-3">افزودن آیتم جدید</span>
+                        <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                        </svg>
+
+
+                    </button>
+                </span>
+                <button class="close">
+                    <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                    </svg>                          
+                </button>
+            </li>
+            <li class="list-style" style="right: 54%; background-color: #E1F7F5;;">
+                <h6 class="mb-2">عنوان لیست سوم</h6>
+                <ul class="drag-zone dropzone my-8 min-h-32">
+
+                </ul>
+                <span class="mt-5">
+                    <button type="button" class="text-gray bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center stark:bg-blue-600 stark:hover:bg-blue-700 stark:focus:ring-blue-800">
+                        <span class="ml-3">افزودن آیتم جدید</span>
+                        <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                        </svg>
+                    </button>
+                </span>
+                <button class="close">
+                    <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                    </svg>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script src="board.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

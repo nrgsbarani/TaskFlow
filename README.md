@@ -113,4 +113,14 @@ After adding new elements, manually reinitialize all tooltips using Flowbite’s
 ```javascript
 // ✅ 4️⃣ Reinitialize ALL tooltips (Fixes old + new tooltips)
 initTooltips();
+initDropdowns();
 ```
+
+## Drag & drop tip and tricks in trello
+
+1. source element to start drag most Only be " Cards "
+2. you most apply `draggable="true"` parameters to all cards that you want drag between lists
+3. target element that you can drop cards over there may be " Cards & Lists" you most implement drag and drop event actions for both
+4. you most use `event.preventDefault();` in `dragover` listener to apply drop event correctly
+5. in our case in `dragend` event listener we most use `initDropdowns();` to work dropdown menu in cards correctly
+

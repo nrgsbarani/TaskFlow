@@ -10,6 +10,7 @@ let CreateItemSwitch = 0; // 0 : off , 1 = create board , 2 = create list , 3 = 
 const ApplicationStorageName = "TrelloApplicationStorage";
 
 
+
 const createNewBoardElement = (item) => {
     return `    <li>
                 <a href="#" class="flex items-center justify-between p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 stark:hover:bg-gray-700 stark:text-white group">
@@ -63,4 +64,249 @@ new Board( {
     ApplicationStorageName : ApplicationStorageName,
 })
 
+//-------------------------------------------------------------------------------------------- Section List
 
+const draggableElements = document.getElementsByClassName("draggable");
+const draggableLists = document.querySelectorAll(".drag-zone");
+
+
+let draggingElement = null;
+/*
+
+function HandleDragEvent (event) {
+    //console.log(this);
+    //console.log('drag' , event.target);
+
+
+}
+
+function HandleDragStartEvent (event) {
+    console.log('dragstart' , event.target);
+
+    draggingElement = event.target;
+
+
+    event.dataTransfer.setData('text/html', event.target.outerHTML);
+
+    event.dataTransfer.dropEffect = 'move';
+
+    event.target.classList.add("dragging-element");
+}
+
+function HandleDragEnterEvent (event) {
+    //console.log('dragenter' , event.target);
+}
+
+function HandleDragOverEvent (event) {
+    //console.log('dragover' , event.target);
+    if (event.preventDefault) { event.preventDefault(); }
+
+    if (!event.target.classList.contains('draggable')) {
+        return;
+    }
+
+    event.target.classList.add("border-t-3");
+    event.target.classList.add("border-t-indigo-500");
+}
+
+function HandleDragLeaveEvent (event) {
+    event.target.classList.remove("border-t-3");
+    event.target.classList.remove("border-t-indigo-500");
+}
+
+function HandleDropEvent (event) {
+    console.log('drop' , event.target);
+
+    event.target.classList.remove("border-t-3");
+    event.target.classList.remove("border-t-indigo-500");
+
+    let target = event.target.closest('.draggable');
+    console.log("parent" ,target);
+    //console.log("target" ,target);
+    if (target != draggingElement) {
+        let dropHTML = event.dataTransfer.getData('text/html');
+        //console.log("drop element " ,dropHTML);
+
+        target.parentNode.removeChild(draggingElement);
+        target.insertAdjacentHTML('beforebegin' , dropHTML);
+        addDragAndDropHandlers(target.previousSibling)
+    }
+
+}
+
+function HandleDragEndEvent (event) {
+    console.log('dragend' , event.target);
+    event.target.classList.remove("dragging-element");
+
+    reinitializeFlowbiteComponents();
+}
+
+const addDragAndDropHandlers = (draggable) => {
+    draggable.setAttribute('draggable', true);
+
+    //draggable.addEventListener('drag',(event) => HandleDragEvent(event) )
+    draggable.addEventListener('dragstart',(event) => HandleDragStartEvent(event) )
+    draggable.addEventListener('dragenter',(event) => HandleDragEnterEvent(event) )
+    draggable.addEventListener('dragover',(event) => HandleDragOverEvent(event) )
+    draggable.addEventListener('dragleave',(event) => HandleDragLeaveEvent(event) )
+    draggable.addEventListener('drop',(event) => HandleDropEvent(event) )
+    draggable.addEventListener('dragend',(event) => HandleDragEndEvent(event) )
+}
+
+
+function reinitializeFlowbiteComponents() {
+    // Reinitialize all tooltips
+    /!*document.querySelectorAll("[data-tooltip-target]").forEach((tooltipTriggerEl) => {
+        const tooltipId = tooltipTriggerEl.getAttribute("data-tooltip-target");
+        const tooltipEl = document.getElementById(tooltipId);
+        if (tooltipEl) {
+            new Flowbite.Tooltip(tooltipEl, tooltipTriggerEl);
+        }
+    });*!/
+
+    // Reinitialize all dropdowns
+    initDropdowns()
+
+    // Reinitialize other components (if needed)
+}
+
+
+for (let draggable of draggableElements) {
+    //addDragAndDropHandlers(draggable);
+}
+
+*/
+/*document.addEventListener('dragstart', (event) => {
+    if (event.target.classList.contains('draggable')) {
+        console.log('dragstart' , event.target);
+        draggingElement = event.target;
+        event.dataTransfer.setData('text/html', event.target.outerHTML);
+        event.dataTransfer.dropEffect = 'move';
+        event.target.classList.add("dragging-element");
+    }
+})*/
+
+const handleDragStartEvent = (element) => {
+    element.addEventListener('dragstart', (event) => {
+        console.log('drag start card' , event.target);
+        draggingElement = event.target;
+        event.dataTransfer.setData('text/html', event.target.outerHTML);
+        event.dataTransfer.dropEffect = 'move';
+        event.target.classList.add("dragging-element");
+    })
+
+    element.addEventListener('dragenter', (event) => {
+        console.log('drag enter card' , event.target);
+    })
+
+    element.addEventListener('dragover', (event) => {
+        console.log('drag over card' , event.target);
+        event.preventDefault();
+
+    })
+
+    element.addEventListener('dragleave', (event) => {
+        console.log('drag leave card' , event.target);
+    })
+
+    element.addEventListener('dragend', (event) => {
+        console.log('drag end card' , event.target);
+        event.target.classList.remove("dragging-element");
+        initDropdowns()
+
+    })
+
+
+    element.addEventListener('drop', (event) => {
+        console.log('drop card' , event.target);
+        event.preventDefault();
+        let target = event.target.closest('.draggable');
+        if (target != draggingElement) {
+            let dropHTML = event.dataTransfer.getData('text/html');
+            //console.log("drop element " ,dropHTML);
+
+            target.parentNode.removeChild(draggingElement);
+            target.insertAdjacentHTML('beforebegin' , dropHTML);
+            handleDragStartEvent(target.previousSibling)
+        }
+
+        draggingElement = null;
+
+    })
+}
+
+Array.from(draggableElements).forEach((draggableElement) => {
+    handleDragStartEvent(draggableElement);
+})
+
+draggableLists.forEach((list)=> {
+    /*list.addEventListener("dragstart", (event) => {
+        console.log('dragstart' , event.target);
+    });*/
+
+    list.addEventListener("dragenter", (event) => {
+        console.log('dragenter' , event.target);
+    })
+
+    list.addEventListener("dragover", (event) => {
+        console.log('dragover' , event.target);
+        event.preventDefault();
+
+    })
+
+    list.addEventListener("dragleave", (event) => {
+        console.log('dragleave' , event.target);
+    })
+
+    list.addEventListener("dragend", (event) => {
+        console.log('dragend' , event.target);
+        event.target.classList.remove("dragging-element");
+        initDropdowns()
+    })
+
+    list.addEventListener('drop' , (event) => {
+        console.log('drop' , event.target);
+        event.preventDefault();
+        if(draggingElement) {
+            list.appendChild(draggingElement);
+            draggingElement = null;
+        }
+
+
+
+    })
+})
+
+/*document.addEventListener('drop', (event) => {
+    if (event.target.classList.contains('draggable')) {
+        console.log('drop' , event.target);
+
+    }
+})*/
+
+/*const handleDragAndDropEventsForLists = (list) => {
+    //d.addEventListener("dragstart", handleDragAndDropEventsForLists);
+
+    list.addEventListener('drop', (event) => {
+
+        console.log('drop', event);
+        event.preventDefault();
+        if (draggingElement) {
+            draggingElement.classList.remove("dragging-element");
+            draggingElement = null;
+        }
+    });
+}*/
+
+/*for (draggableList of draggableLists) {
+    handleDragAndDropEventsForLists(draggableList);
+}*/
+/*draggableLists.forEach( (draggable) => {
+    //console.log(draggable);
+    draggable.addEventListener('drop', (event) => {
+        event.preventDefault();
+        console.log('drop', event.target);
+    })
+})*/
+
+//console.log(draggableLists);
