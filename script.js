@@ -8,7 +8,7 @@ let CancelCreationButton = document.getElementById('cancel-creation-button');*/
 
 let CreateItemSwitch = 0; // 0 : off , 1 = create board , 2 = create list , 3 = create card
 const ApplicationStorageName = "TrelloApplicationStorage";
-
+const APPStoragename = 'Trellolist';
 
 
 const createNewBoardElement = (item) => {
@@ -43,8 +43,68 @@ const createNewBoardElement = (item) => {
                         </div>
                     </div>
                 </a>
-            </li>
-       ` ;
+            </li>`
+}
+
+const createNewListElement = (item) => {
+    
+    // this variable is for style="right: "
+    let right_style = null; 
+    // this variable is for style="color: "
+    let background_color = null; 
+    // console.log(item.id)
+    switch (item.id) {
+        case 1 : 
+            right_style = 2; // 2%
+            background_color = '#7AB2B2';
+            break;
+        case 2 : 
+            right_style = 28; // 28%
+            background_color = '#A4CAFE';
+            break;
+        case 3 : 
+            right_style = 54; // 54%
+            background_color = '#E1F7F5';
+            break
+        default : 
+            break;
+    }
+    return `<li class="list-style" style="right: ${right_style}%; background-color: ${background_color};">
+                <h6 class="mb-2">${item.list_name}</h6>
+                <ul class="drag-zone dropzone my-8 min-h-32">
+
+                </ul>
+                <span class="mt-5">
+                    <button type="button" class="text-gray bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center stark:bg-blue-600 stark:hover:bg-blue-700 stark:focus:ring-blue-800">
+                        <span class="ml-3">افزودن آیتم جدید</span>
+                        <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                        </svg>
+                    </button>
+                </span>
+                <button class="close">
+                    <svg class="w-6 h-6 text-gray-800 stark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                      </svg>                                                  
+                </button>
+                <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots${item.id}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600 close" type="button" style="background-color: ${background_color};">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+                    <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+                    </svg>
+                </button>
+                
+                <!-- Dropdown menu -->
+                <div id="dropdownDots${item.id}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">حذف</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">تغییر نام</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>`
 }
 
 
@@ -62,7 +122,27 @@ new Board( {
     CancelCreationButton : document.getElementById('cancel-creation-button'),
     CreateNewItemButton : document.getElementById('create-new-item-button'),
     ApplicationStorageName : ApplicationStorageName,
+    ErrorList : document.getElementById('error'),
+    BoardError : document.getElementById('boardError'),
 })
+
+// new object of list class
+new list ( {
+    lists : document.getElementsByClassName('list'),
+    addNewListButton : document.querySelector('.new-list-button'),
+    sidebarBox : document.getElementById('create-new-item-box'),
+    showSidebarTag : document.getElementById('create-new-item-tag'),
+    showSidebarInput : document.getElementById('create-new-item-input'),
+    createListButton : document.getElementById('create-new-item-button'),
+    cancleListButton : document.getElementById('cancel-creation-button'),
+    APPStoragename : APPStoragename,
+    ErrorList : document.getElementById('error'),
+    template : (item) => {
+        return createNewListElement(item);
+    },
+    CreateItemSwitch : CreateItemSwitch,
+    BoardError : document.getElementById('boardError'),
+} )
 
 //-------------------------------------------------------------------------------------------- Section List
 

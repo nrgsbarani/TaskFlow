@@ -80,7 +80,7 @@ html {
     cursor: pointer;
 }
 
-#create-list, #cancle-list {
+#create-new-item-button, #cancel-creation-button {
     width: 40%;
     border: none;
     padding: 7px 10px;
@@ -90,24 +90,24 @@ html {
     margin-bottom: 10px;
 }
 
-#create-list {
+#create-new-item-button , .edit-board-button {
     background-color: #229799;
     color: snow;
     transition: transform 0.1s ease-in-out;
 }
 
-#create-list:hover {
+#create-new-item-button:hover , .edit-board-button:hover {
     background-color: #145a5b;
     transform: scale(1.05);
 }
 
-#cancle-list {
+#cancel-creation-button , .delete-board-button {
     background-color: #bdbdbd;
     color: snow;
     transition: transform 0.1s ease-in-out;
 }
 
-#cancle-list:hover {
+#cancel-creation-button:hover , .delete-board-button:hover {
     background-color: #424242;
     transform: scale(1.05);
 }
@@ -130,13 +130,14 @@ html {
     padding: 15px;
     border: none;
     border-radius: 4px;
-    transform: scale(1.01);
+    transform: scale(0.9);
     transition: transform 0.3s ease;
     cursor: pointer;
+    color: black;
 }
 
 .close:hover {
-    transform: scale(1.2);
+    transform: scale(1.0);
 }
 
 .draggable.dragging-element {

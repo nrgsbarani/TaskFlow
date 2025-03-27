@@ -13,6 +13,8 @@ class Board {
 
     // function
     template;
+    ErrorList;
+    BoardError;
 
 
 
@@ -31,6 +33,8 @@ class Board {
         this.cancelCreationButton = options.CancelCreationButton;
         this.CreateNewItemButton = options.CreateNewItemButton;
         this.ApplicationStorageName = options.ApplicationStorageName;
+        this.ErrorList = options.ErrorList;
+        this.BoardError = options.BoardError;
 
 
         this.showList(options);
@@ -78,7 +82,7 @@ class Board {
                     let index = this.getElementIndexFromEvent(event);
 
                     let list = this.loadBoardFromLocalStorage();
-                    let newBoardName = prompt("لطفا مورد جدید را برای بورد وارد کنید  : " , list[index].board_name).trim();
+                    let newBoardName = prompt("لطفا عنوان جدید را برای بورد وارد کنید  : " , list[index].board_name).trim();
                     //console.log(newBoardName)
 
                     event.target.closest('a').querySelector('.board-name-label').innerText = newBoardName;
@@ -117,11 +121,13 @@ class Board {
             //console.log("AAAAA");
             let boards = this.loadBoardFromLocalStorage();
             if ( boards.length >= 5 ) {
-                alert("شما به حداکثر تعداد Board در پلن خود رسیده اید . لطفا پلن خود را به Premium ارتقاء دهید")
+                this.BoardError.classList.remove('hidden');
                 return false;
             }
 
             this.CreateItemSwitch = 1;
+            this.ErrorList.classList.add('hidden');
+            this.BoardError.classList.add('hidden');
             this.inputBox.classList.remove('hidden');
             this.CreateItemTag.innerText = 'ایجاد بورد جدید';
             this.CreateItemInput.placeholder = " عنوان بورد را وارد نمایید ..."
@@ -135,31 +141,25 @@ class Board {
         })
         this.CreateNewItemButton.addEventListener('click', (event) => {
             this.initToCreateNewBoard();
+            this.CreateItemSwitch = 0;
         })
     }
 
     initToCreateNewBoard() {
         let newItemText = this.CreateItemInput.value.trim();
 
-        if (typeof newItemText === "string" && newItemText.length === 0 || newItemText === null )  {
-            // show error to user Enter valid data
-            alert("لطفا عبارت معتبر را وارد کنید");
-            console.error("لطفا عبارت معتبر را وارد کنید")
+        //console.log(`board : ${this.CreateItemSwitch}`)
+        if (this.CreateItemSwitch == 1) {
+            if (typeof newItemText !== "string" || newItemText.length === 0 || newItemText === null )  {
+                // show error to user Enter valid data
+                console.log('اضافه کردن برد')
+                alert("لطفا عبارت معتبر را وارد کنید");
+                console.error("لطفا عبارت معتبر را وارد کنید")
+                return false;
+            }
+            this.createNewBoard(newItemText);
+        } else {
             return false;
-        }
-
-        switch ( this.CreateItemSwitch  ) { // return false; // shit
-            case 0:
-                return false;
-            case 1:
-                return this.createNewBoard(newItemText);
-            case 2:
-                return CreateItemSwitch = 3;
-            case 3:
-                return CreateItemSwitch = 4;
-            default:
-                return false;
-            //break;
         }
     }
 
